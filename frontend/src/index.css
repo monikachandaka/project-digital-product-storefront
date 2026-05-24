@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body antialiased transition-colors duration-500;
+    @apply bg-surface-light text-stone-900;
+    @apply dark:bg-surface-dark dark:text-stone-100;
+    /* Animated subtle background gradient for light/dark mode */
+    background-image: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.05) 0%, transparent 50%);
+  }
+  
+  .dark body {
+    background-image: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.05) 0%, transparent 50%);
+  }
+
+  h1, h2, h3 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply relative bg-brand-500 hover:bg-brand-400 text-white font-bold px-6 py-2.5 rounded-xl
+           transition-all duration-300 hover:shadow-[0_0_20px_rgba(14,165,233,0.4)] hover:-translate-y-0.5
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed border border-brand-400/50 overflow-hidden;
+  }
+
+  /* Optional: animated glow on primary button hover */
+  .btn-primary::after {
+    content: '';
+    @apply absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300 pointer-events-none;
+  }
+  .btn-primary:hover::after {
+    @apply opacity-100;
+  }
+
+  .btn-secondary {
+    @apply bg-white/50 dark:bg-stone-800/50 backdrop-blur-sm border border-stone-200 dark:border-stone-700 
+           text-stone-700 dark:text-stone-300 hover:border-brand-500/50 hover:bg-white dark:hover:bg-stone-800 hover:text-brand-500
+           font-bold px-6 py-2.5 rounded-xl transition-all duration-300
+           active:scale-95 hover:shadow-lg hover:shadow-brand-500/10 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent hover:bg-stone-100 dark:hover:bg-stone-800/80
+           text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 font-medium px-4 py-2 rounded-xl
+           transition-all duration-200 active:scale-95;
+  }
+
+  .card {
+    @apply bg-white dark:bg-stone-800/40 rounded-2xl border border-stone-200 dark:border-stone-800
+           shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:hover:shadow-[0_8px_30px_rgba(14,165,233,0.05)] 
+           hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-300;
+  }
+
+  .glass {
+    @apply bg-white/60 dark:bg-stone-900/60 backdrop-blur-xl border border-white/40 dark:border-stone-800/60;
+  }
+
+  .input-field {
+    @apply w-full bg-white dark:bg-stone-900/50 border border-stone-200 dark:border-stone-700
+           rounded-xl px-4 py-3 text-stone-900 dark:text-stone-100
+           placeholder-stone-400 dark:placeholder-stone-500
+           focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500
+           transition-all duration-300 shadow-sm hover:border-stone-300 dark:hover:border-stone-600;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-title {
+    @apply font-display text-3xl sm:text-4xl font-bold text-stone-900 dark:text-stone-100;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-200 bg-clip-text text-transparent;
+  }
+
+  .skeleton {
+    @apply bg-gradient-to-r from-stone-200 via-stone-100 to-stone-200 dark:from-stone-800 dark:via-stone-700 dark:to-stone-800
+           animate-shimmer bg-[length:200%_100%] rounded;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { @apply bg-stone-100 dark:bg-stone-900; }
+::-webkit-scrollbar-thumb { @apply bg-stone-300 dark:bg-stone-700 rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-brand-400; }
+
+/* Star rating */
+.star-rating { display: flex; gap: 2px; }
+
+/* Razorpay modal fix */
+.razorpay-container { z-index: 9999 !important; }
